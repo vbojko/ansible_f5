@@ -11,6 +11,7 @@ while test $# -gt 0; do
                         echo "-o, --operation           run the operation playbook"
                         echo "-t, --teardown            run the teardown playbook"
                         echo "--today                   run the today playbook"
+                        echo "-ltm1                     run thr operationLTM1 playbook"
                         exit 0
                         ;;
                 -n)
@@ -58,6 +59,10 @@ while test $# -gt 0; do
                 --all*)
                         ansible-playbook playbooks/onboarding.yml --ask-vault-pass -e @password.yml -vvv 
                         ansible-playbook playbooks/operations.yml --ask-vault-pass -e @password.yml -e state="present" -vvv 
+                        shift
+                        ;;
+                -ltm1)
+                        ansible-playbook playbooks/operationsLTM1.yml --ask-vault-pass -e @password.yml -e state="present" -vvv
                         shift
                         ;;
                 *)
